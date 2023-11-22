@@ -3,9 +3,9 @@ import {
 } from '@heroicons/react/24/outline';
 import {Menu} from '@/components/menu';
 import React, { useEffect } from 'react';
-import { Viajes } from '../components/Viajes';
+import { Viajes } from '@/components/Viajes';
 import { Travel } from "@/interfaces/user.interfaces";
-import { loadTravelHistory } from '../services/user.services';
+import { loadTravelHistory } from '@/services/user.services';
 
 const testTravels: Travel[] = [];
 
@@ -17,7 +17,7 @@ const HistorialViajes = () => {
     const newData: Travel[] = []
     try {
       const response = loadTravelHistory()
-      console.log(response)
+      
       if (response === undefined) {
         return
       }

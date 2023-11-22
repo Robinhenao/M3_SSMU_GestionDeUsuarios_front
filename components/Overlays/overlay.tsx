@@ -1,7 +1,14 @@
-import { Fragment, MouseEventHandler } from "react";
+import { Fragment, MouseEventHandler, ReactNode } from "react";
 import { XCircleIcon } from '@heroicons/react/24/solid'
 
-export function Overlay({ isOpen, setIsOpen, children }: {isOpen: boolean, setIsOpen: CallableFunction, onClose: MouseEventHandler, children: any}) {
+interface OverlayProps {
+    isOpen: boolean;
+    setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    onClose: MouseEventHandler<HTMLButtonElement>;
+    children: ReactNode;
+}
+
+const Overlay = ({ isOpen, setIsOpen, onClose, children }: OverlayProps) => {
 
     const handleClose = () => {
         setIsOpen(!isOpen);
@@ -18,7 +25,7 @@ export function Overlay({ isOpen, setIsOpen, children }: {isOpen: boolean, setIs
                         </button>
                         <div className=' relative bottom-4 left-7 '>
                             <div className='bg-white m-auto flex items-center flex-col w-fit h-fit rounded-md border-black border-2'>
-                                <div className='flex flex-row justify-between w-fit h-fit'> 
+                                <div className='flex flex-row justify-between w-fit h-fit'>
                                     {children}
                                 </div>
                             </div>
@@ -30,4 +37,4 @@ export function Overlay({ isOpen, setIsOpen, children }: {isOpen: boolean, setIs
     );
 }
 
-export default Overlay;
+export { Overlay };

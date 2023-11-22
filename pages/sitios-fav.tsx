@@ -1,53 +1,44 @@
-import {
-  PlusCircleIcon,
-  MapPinIcon,
-} from '@heroicons/react/24/outline';
+import { PlusCircleIcon, MapPinIcon } from '@heroicons/react/24/outline';
 import { Menu } from '@/components/menu';
 import React, { useEffect, useState } from 'react';
-import { Sitios } from '../components/sitios';
+import { Sitios } from '@/components/sitios';
 import { Sites } from '@/interfaces/user.interfaces';
-import { loadFavSites } from '../services/user.services';
+import { loadFavSites } from '@/services/user.services';
 
 const testSites: Sites[] = [];
 
 const SitiosFavoritos = () => {
-
-  const [sites, setSites] = React.useState(testSites);
+  const [sites, setSites] = useState(testSites);
 
   useEffect(() => {
-    const newData: Sites[] = []
-    try {
-      const response = loadFavSites()
-      console.log(response)
-      if (response === undefined) {
-        return
+    const fetchData = async () => {
+      try {
+        const response = await loadFavSites();
+        
+
+        if (!response) {
+          return;
+        }
+
+        setSites([response]);
+      } catch (error) {
+        console.error("Error: ", error);
+        setSites([]);
       }
-      response
-        .then((response) => {
-          /* Here goes the response answer*/
-          newData.push(response)
-        })
-        .catch(() => {
-          setSites([]);
-        });
-    } catch (error) {
-        console.log("Error: ", error)
-    }
-    setSites(newData);
+    };
+
+    fetchData();
   }, []);
 
   const handleAdd = () => {
     const newSite: Sites = {
       userCode: sites.length,
       icon: 0,
-      name:  '',
-      address:   '',
-    }
-    setSites([
-      ...sites,
-      newSite
-    ]);
-  }
+      name: '',
+      address: '',
+    };
+    setSites([...sites, newSite]);
+  };
 
   return (
     <div>
@@ -68,10 +59,7 @@ const SitiosFavoritos = () => {
                         Sitios Favoritos
                       </div>
                       <div className='mt-4 ml-10 text-lg font-semibold leading-6 '>
-                        <button
-                          className='flex gap-2 '
-                          onClick={handleAdd}
-                        >
+                        <button className='flex gap-2 ' onClick={handleAdd}>
                           <div className='mt-1'>Agregar</div>
                           <PlusCircleIcon className='h-8' aria-hidden='true' />
                         </button>
@@ -79,7 +67,7 @@ const SitiosFavoritos = () => {
                     </div>
                   </div>
                   <div className='flex flex-col w-full   '>
-                    <Sitios loadSites={sites} setLoadSites={setSites}/>
+                    <Sitios loadSites={sites} setLoadSites={setSites} />
                   </div>
                 </div>
               </div>

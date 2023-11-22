@@ -6,8 +6,7 @@ import {
     UserGroupIcon,
 } from '@heroicons/react/24/outline';
 import { Menu } from '@/components/menu';
-/* import {Tarjeta} from '../components/tarjetas'; */
-import React, { useState } from 'react';
+
 import Link from 'next/link';
 
 const Familia = () => {
@@ -37,15 +36,15 @@ const Familia = () => {
                                     <div className="mt-16 ml-20 flex flex-col w-full pb-4 h-full  ">
                                         <div className="pt-4 mb-4 flex h-20 w-full  border rounded-lg">
                                             <UserCircleIcon className="mx-4 mt-1 h-10 w-10 " />
-                                            {<label className='ml-2 '>nombre</label>}
+                                            <label className='ml-2 '>nombre</label>
 
                                             <div className=" h-4 w-18 content-center">
-                                                <Link className='h-10 w-full items-center' href=''>
+                                                <Link className='h-10 w-full items-center' href='#'>
                                                     <PencilSquareIcon className=" ml-16 mt-1 h-10 w-8" aria-hidden="true" />
                                                 </Link>
                                             </div>
                                             <div className=" h-4 w-18 content-center">
-                                                <Link className='h-10 w-full items-center' href=''>
+                                                <Link className='h-10 w-full items-center' href='#'>
                                                     <TrashIcon className=" ml-16 mt-1 h-10 w-8" aria-hidden="true" />
                                                 </Link>
                                             </div>

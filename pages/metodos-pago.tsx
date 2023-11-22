@@ -1,20 +1,14 @@
 import {
-  PencilSquareIcon,
-  ClipboardDocumentListIcon,
-  UserCircleIcon,
-  IdentificationIcon,
-  CreditCardIcon,
-  MapPinIcon,
-  MapIcon,
+  
   RectangleGroupIcon,
   BanknotesIcon,
   PlusIcon,
 } from '@heroicons/react/24/outline';
 import {Menu} from '@/components/menu';
-/* import {Tarjeta} from '../components/tarjetas'; */
-import React, { useState } from 'react';
-import AgregarTarjetas from './agregar-tarjetas';
-import {Tarjetas} from '../components/tarjetas';
+
+
+
+import {Tarjetas} from '@/components/tarjetas';
 
 const Pagos = () => {
   

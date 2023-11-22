@@ -17,7 +17,7 @@ const Menu = () => {
         <div className='px-4 sm:px-2 '>
           <div className='h-32 w-32'>
             <div className='flex place-content-center'>
-              <UserCircleIcon className='h-20 w-20' aria-hidden='true' />
+              <UserCircleIcon className='text-sm h-20 w-20' aria-hidden='true' />
             </div>
             <div className='text-base text-center font-semibold leading-6 text-gray-500'>
               Preferencial
@@ -28,7 +28,7 @@ const Menu = () => {
             Mi perfil
           </div>
           <div className=' min-w-0 flex flex-col gap-5 justify-center'>
-            {/* <div className="rounded-lg w-80 sm:px-2 text-lg font-semibold leading-6  hover:bg-cyan-400/[.3] hover:text-blue-600"> */}
+            
             <div className='flex justify-center gap-10 rounded-lg w-80 sm:px-2 text-lg font-semibold leading-6 hover:bg-cyan-400/[.3] hover:text-blue-600 '>
               <IdentificationIcon
                 fill='black'
@@ -39,7 +39,7 @@ const Menu = () => {
                 Información Personal 
               </Link>
             </div>
-            {/* </div> */}
+            
             <div className='flex justify-center gap-10 rounded-lg w-80 sm:px-2 text-lg font-semibold leading-6 hover:bg-cyan-400/[.3] hover:text-blue-600 '>
               <CreditCardIcon
                 fill='black'

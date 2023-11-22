@@ -1,14 +1,19 @@
 import { XCircleIcon, ArrowRightOnRectangleIcon } from '@heroicons/react/24/outline'
 import { UserCircleIcon } from '@heroicons/react/24/solid'
 import * as React from 'react';
-import Overlay from '../components/Overlays/overlay';
-import Notification from '../components/Overlays/notification';
-import { registerUser } from '../services/user.services';
+import {Overlay} from '@/components/Overlays/overlay';
+import {Notification} from '@/components/Overlays/notification';
+import { registerUser } from '@/services/user.services';
+
+
+
+
 
 const Home = () =>{
-    const emailregex = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
+    const emailregex = /^[-a-z0-9~!$%^&*_=+}{?'?]+(\.[-a-z0-9~!$%^&*_=+}{?'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
     const [error, setError] = React.useState(false);
     const [isOpen, setIsOpen] = React.useState(false);
+    
 
     const [userReg, setUserReg] = React.useState({
         name: "",
@@ -18,49 +23,53 @@ const Home = () =>{
         password: ""
     })
 
-    const [veriPassword, setVeriPassword] = React.useState(String)
+    const [veriPassword, setVeriPassword] = React.useState("")
 
-    function handleOnChange(e: any) {
+    const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const numregex = /^$|^[0-9]*$/;
         const regex = /^(?=(?:[^0-9]*[0-9]){0,3}[^0-9]*$)(?=(?:[0-9]*[^0-9]){0,3}[0-9]*$)[a-zA-Z0-9]{0,6}$/;
-        if (e.target.name == "password" && !regex.test(e.target.value) ||
-            e.target.name == "veriPassword" && !regex.test(e.target.value) ||
-            e.target.name == "id" && !numregex.test(e.target.value)) {
-            return
+    
+        if (
+            (e.target.name === "password" && !regex.test(e.target.value)) ||
+            (e.target.name === "veriPassword" && !regex.test(e.target.value)) ||
+            (e.target.name === "id" && !numregex.test(e.target.value))
+        ) {
+            return;
         }
-        if (e.target.name == "veriPassword")  {
-            setVeriPassword(e.target.value)
-            return
-        }
-        else {
+    
+        if (e.target.name === "veriPassword") {
+            setVeriPassword(e.target.value);
+            return;
+        } else {
             setUserReg({
                 ...userReg,
-                [e.target.name]: e.target.value
-            })
+                [e.target.name]: e.target.value,
+            });
         }
-    }
+    };
 
     const handleRegister = async () => {
-        if (veriPassword != userReg.password) {
-            setError(true);
-            return
+        if (veriPassword !== userReg.password) {
+          setError(true);
+          return;
         }
         if (!emailregex.test(userReg.email)) {
-            return
+          return;
         }
         try {
-            const response = await registerUser(userReg)
-            console.log(response)
+            const response = await registerUser(userReg);
+        
             if (response === undefined) {
-                setError(true);
-                toggleOverlay()
+              setError(true);
+              toggleOverlay();
             }
+        
             setError(false);
-            toggleOverlay()
-        } catch (error) {
-            console.log("Error: ", error)
+            toggleOverlay();
+          } catch (error) {
+            console.error(error);
         }
-    }
+        };
     
     const toggleOverlay = () => {
         setIsOpen(!isOpen);
